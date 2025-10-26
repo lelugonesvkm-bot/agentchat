@@ -40,8 +40,8 @@ Python 3.10 o superior
 
 ## ⚙️ IDE
 
-Visual Studio Code
-Plugins: Python, Pylance, Python Environment
+* Visual Studio Code
+* Plugins: Python, Pylance, Python Environment
 
 ## 🛠️ Instalación
 
