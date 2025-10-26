@@ -1,11 +1,11 @@
 # btc.py
 # Bitcoin Expert Assistant Chat Example using AutoGen
 #
-# An example of using AutoGen to create a group chat between a Bitcoin expert assistant and a user.
-# The user can ask questions about Bitcoin, and the assistant provides detailed answers.
-# The chat continues until the user mentions "thank you" in their message.
-# The conversation is displayed in the console.
-# Additional imports for Bitcoin data fetching and plotting
+# This script sets up a multi-agent chat system where a user can interact with a Bitcoin expert assistant.
+# The Bitcoin expert can fetch historical price data and instruct a plotting assistant to create visualizations.
+# The conversation continues until the user mentions "thank you" or a maximum number of turns is reached.
+# Required packages: autogen-agentchat, autogen-core, autogen-ext, yfinance, matplotlib, pandas, python-dotenv
+# Make sure to set the GEMINI_API_KEY environment variable for OpenAI access.
 
 # Import necessary modules
 import os
@@ -68,51 +68,50 @@ def plot_bitcoin_data(filename: str) -> str:
     import matplotlib.pyplot as plt
 
     # Use a non-interactive backend for matplotlib
-    # Esto es crucial para entornos de agentes
     try:
         plt.switch_backend('Agg')
     except Exception:
-        # Esto maneja el caso donde el backend ya está configurado (como en la corrección global)
+        # This handles the case where the backend is already set (such as in a global configuration)
         pass 
     
     try:
-        # 1. Read data from the CSV file (REQUIERE que el CSV tenga las columnas 'Open' y 'Close')
+        # Read data from the CSV file (REQUIRES that the CSV contains the columns 'Open' and 'Close')
         data = pd.read_csv(filename, parse_dates=['Date'])
         
-        # Validación básica para asegurar que las columnas existen
+        # Basic validation to ensure the columns exist
         if 'Open' not in data.columns or 'Close' not in data.columns:
              raise ValueError("El archivo CSV debe contener las columnas 'Open' y 'Close' para la comparación.")
             
-        # 2. Create the chart
+        # Create the chart
         plt.figure(figsize=(12, 6))
         
-        # Graficar Precio de Cierre (Close)
+        # Plot Closing Price (Close)
         plt.plot(data['Date'], data['Close'], label='Precio de Cierre (Close)', color='red', linewidth=2)
         
-        # Graficar Precio de Apertura (Open)
+        # Plot Opening Price (Open)
         plt.plot(data['Date'], data['Open'], label='Precio de Apertura (Open)', color='blue', linestyle='--', linewidth=1.5)
         
         plt.title('Bitcoin: Comparativa de Precios de Apertura y Cierre', fontsize=16)
         plt.xlabel('Fecha', fontsize=12)
         plt.ylabel('Precio (USD)', fontsize=12)
         
-        # Mostrar ambas leyendas
+        # Show both legends
         plt.legend(loc='best', fontsize=10) 
         plt.grid(True, linestyle=':', alpha=0.6)
         
-        # 3. Save the chart as a PNG file
+        # Save the chart as a PNG file
         output_filename = "bitcoin_open_vs_close_plot.png"
         plt.savefig(output_filename) 
         
         # Close the figure to free memory    
         plt.close() 
         
-        return f"✅ Gráfico de comparativa Open/Close generado y guardado exitosamente como '{output_filename}'." 
+        return f"✅ Open/Close comparison chart generated and successfully saved as '{output_filename}'."
     
     except Exception as e:
-        # Asegurarse de cerrar figuras pendientes si hay un error
+        # Ensure any pending figures are closed if there is an error
         plt.close() 
-        return f"❌ Error al generar o guardar el gráfico: {e}"     
+        return f"❌ Error generating or saving the chart: {e}"     
 
 # Define the FunctionTool for fetching Bitcoin data 
 bitcoin_tool = FunctionTool(
