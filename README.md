@@ -54,6 +54,9 @@ Plugins: Python, Pylance, Python Environment
 * pip install pandas
 * pip install matplotlib
 
+Instalación sugerida:
+* pip install -r requirements.txt
+
 ## Referencias
 
 [Autogen][def1]
