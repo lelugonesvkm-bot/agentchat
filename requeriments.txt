@@ -1,0 +1,6 @@
+autogen-agentchat
+autogen-ext[openai]
+python-dotenv
+yfinance
+pandas
+matplotlib
