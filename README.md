@@ -31,8 +31,8 @@ Similar a <btc.py>, con la diferencia que agrega el set de datos las fechas de A
 
 ### Ejemplo de Ingreso Rango de Fechas
 
-**Start Date:** 2025-01-02
-**End Date:** 2025-10-20
+* **Start Date:** 2025-01-02
+* **End Date:** 2025-10-20
 
 ## Pre-requisitos
 
@@ -45,14 +45,14 @@ Plugins: Python, Pylance, Python Environment
 
 ## Instalación
 
-python -m venv .venv
-.venv\Scripts\activate.bat
+* python -m venv .venv
+* .venv\Scripts\activate.bat
 
-pip install -U "autogen-agentchat" "autogen-ext[openai]"
-pip install python-dotenv
-pip install yfinance
-pip install pandas
-pip install matplotlib
+* pip install -U "autogen-agentchat" "autogen-ext[openai]"
+* pip install python-dotenv
+* pip install yfinance
+* pip install pandas
+* pip install matplotlib
 
 ## Referencias
 
